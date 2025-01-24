@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Input dan Popup</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <form>
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" name="nama">
+    <label for="tahunLahir">Tahun Lahir:</label>
+    <input type="number" id="tahunLahir" name="tahunLahir">
+    <button type="button" onclick="tampilkanPopup()">Tampilkan</button>
+  </form>
+
+  <div id="popup" class="popup-hidden">
+    <h2>Hello</h2>
+    <p id="hasil"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

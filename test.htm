@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background</title>
+</head>
+<body>
+    <div class="ho">
+        <img class="cls" src="cross.png" alt="">
+        <div class="cir">
+        <img class="em" src="email.png" alt=""></div>
+        <p style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; margin-left: 78px;">Check your Email</p>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; color:#c8d6e5; margin-left: 57px; margin-top:-8px">Enter the Verification Code sent to</p>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; margin-left: 43px; margin-top:-8px;">mashendragunawan04@gmail.com</p>
+        <hr style="width:200px; margin-left: 45px; margin-top: 30px; border-color: #05c46b; position: absolute; "></hr>
+        <div class="inp">
+        <input type="number" placeholder="-" maxlength="1" oninput="moveToNext(this)"> 
+        <input type="number" placeholder="-" maxlength="1" oninput="moveToNext(this)">
+        <input type="number" placeholder="-" maxlength="1" oninput="moveToNext(this)"> 
+        <input type="number" placeholder="-" maxlength="0" oninput="moveToNext(this)" >
+    </div>
+    <button>Submit</button>
+    </div>
+</body>
+    <style>
+        body{
+            background-color: #05c46b;
+        }
+        .ho{
+            width: 300px;
+            height: 350px;
+            background-color: #fff;
+            margin-left: 800px;
+            margin-top:300px;
+            border-radius: 5px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.20);
+        }
+        .cls{
+            width: 15px;
+            height: 15px;
+            margin-left: 274px;
+            margin-top: 8px;
+        }
+        .em{
+            width: 15px;
+            height: 15px;
+            position:absolute;
+            margin-left: 9px;
+            margin-top: 5px;
+            
+        }
+        .cir{
+            width: 30px;
+            height: 30px;
+            background-color: #10ac84;
+            border-radius: 50%;
+            margin-left: 130px;
+            margin-top:-1px;
+            
+        }
+        input{
+            display:inline;
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #10ac84;
+            border: 1px solid #10ac84;
+            outline: none;
+            
+        }
+        input::-webkit-inner-spin-button,
+        input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+            }
+        .inp{
+            margin-top: 90px;
+            margin-left: 30px;
+            font-weight: bold;
+        }
+        button{
+            margin-top: 30px;
+            margin-left: 28px;
+            width: 245px;
+            height: 35px;
+            background-color: #10ac84;
+            border: none;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function moveToNext(input) {
+            if (input.value.length >= input.maxLength) {
+                var next = input.nextElementSibling;
+                if (next) {
+                    next.focus();
+                }
+            }
+            // Batasi nilai menjadi 1 karakter
+            input.value = input.value.slice(0, 1);
+        }
+        </script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button</title>
+</head>
+<body>
+    <button class="avoid-button">Tidak Setuju</button>
+</body>
+    <style>
+        .avoid-button {
+  background-color: #4CAF50; /* Warna latar tombol */
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition: transform 0.3s ease-in-out; /* Efek transisi */
+}
+
+.avoid-button:hover {
+  transform: translateX(10px); /* Geser tombol ke kanan saat dihover */
+}
+    </style>
+    <script>
+        const button = document.querySelector('.avoid-button');
+
+button.addEventListener('mousemove', (event) => {
+  const rect = button.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  button.style.transform = `translate(${Math.random() * 20 - 10}px, ${Math.random() * 20 - 10}px)`;
+});
+    </script>
+</html>
