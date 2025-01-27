@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tombol Menghindar</title>
+    <style>
+        .avoid-button {
+            background-color: #4CAF50; /* Warna tombol */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            position: relative; /* Penting untuk animasi */
+        }
+
+        .avoid-button:hover {
+            animation: avoid 0.5s ease-in-out infinite;
+        }
+
+        @keyframes avoid {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="avoid-button">Klik Saya</button>
+
+    <script>
+        const button = document.querySelector('.avoid-button');
+
+button.addEventListener('mousemove', (event) => {
+    // Mendapatkan posisi kursor relatif terhadap tombol
+    const rect = button.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    // Mengubah arah pergerakan berdasarkan posisi kursor
+    // ... (logika untuk mengubah animasi)
+});
+    </script>
+</body>
+</html>
