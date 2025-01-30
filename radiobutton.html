@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Switch Satu Tombol</title>
+    <style>
+        /* Container untuk toggle switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Sembunyikan checkbox default */
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* Slider (latar belakang toggle) */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        /* Lingkaran (tombol toggle) */
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        /* Saat toggle aktif (checked) */
+        input:checked + .slider {
+            background-color: #16a085; /* Warna biru */
+        }
+
+        /* Gerakkan lingkaran ke kanan saat toggle aktif */
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Teks status (opsional) */
+        .status-text {
+            margin-left: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <label class="toggle-switch">
+            <input type="checkbox" id="toggle">
+            <span class="slider"></span>
+        </label>
+        <span class="status-text" id="status">OFF</span>
+    </div>
+
+    <script>
+        // Tambahkan interaksi untuk mengubah teks status
+        const toggle = document.getElementById('toggle');
+        const statusText = document.getElementById('status');
+
+        toggle.addEventListener('change', function() {
+            if (this.checked) {
+                statusText.textContent = 'ON';
+            } else {
+                statusText.textContent = 'OFF';
+            }
+        });
+    </script>
+</body>
+</html>
