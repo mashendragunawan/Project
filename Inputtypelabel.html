@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Label Input</title>
+    <style>
+        /* Styling untuk container input */
+        .input-group {
+            position: relative;
+            margin: 20px 0;
+            width: 300px;
+        }
+
+        /* Styling untuk input text */
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        /* Styling untuk placeholder (label) */
+        .input-group label {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: #999;
+            background-color: #fff;
+            padding: 0 5px;
+            transition: all 0.3s ease;
+            pointer-events: none; /* Agar label tidak mengganggu klik input */
+        }
+
+        /* Efek saat input focus atau diisi */
+        .input-group input:focus + label,
+        .input-group input:not(:placeholder-shown) + label {
+            top: 0;
+            font-size: 12px;
+            color: #007bff;
+        }
+
+        /* Efek border saat input focus */
+        .input-group input:focus {
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-group">
+        <input type="text" id="username" placeholder=" "> <!-- Biarkan placeholder kosong -->
+        <label for="username">Username</label>
+    </div>
+</body>
+</html>

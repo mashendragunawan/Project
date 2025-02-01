@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Form</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .search-container {
+            margin: 20px;
+        }
+
+        #searchInput {
+            padding: 10px;
+            width: 200px;
+        }
+
+        #searchButton {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #resultsContainer {
+            margin-top: 20px;
+        }
+
+        .result-item {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .result-item .close {
+            margin-left: 10px;
+            color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML Structure -->
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Cari...">
+        <button id="searchButton">Cari</button>
+    </div>
+
+    <div id="resultsContainer"></div>
+
+    <script>
+        // JavaScript Code
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const query = document.getElementById('searchInput').value;
+            if (query) {
+                // Simulasikan hasil pencarian
+                const results = ['Hasil 1', 'Hasil 2', 'Hasil 3']; // Ganti dengan hasil pencarian sebenarnya
+                displayResults(results);
+            }
+        });
+
+        function displayResults(results) {
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = ''; // Bersihkan hasil sebelumnya
+
+            results.forEach(result => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                resultItem.textContent = result;
+
+                const closeButton = document.createElement('span');
+                closeButton.className = 'close';
+                closeButton.textContent = '×';
+                closeButton.addEventListener('click', function() {
+                    resultsContainer.removeChild(resultItem);
+                });
+
+                resultItem.appendChild(closeButton);
+                resultsContainer.appendChild(resultItem);
+            });
+        }
+    </script>
+</body>
+</html>

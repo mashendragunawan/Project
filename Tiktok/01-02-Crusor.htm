@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ripple Effect</title>
+    <style>
+        .ripple-container {
+            position: relative;
+            overflow: hidden; /* Ensure ripples stay within container */
+            width: 300px; /* Example width */
+            height: 200px; /* Example height */
+            background-color: #f0f0f0; /* Example background color */
+            border-radius: 5px; /* Optional rounded corners */
+            cursor: pointer; /* Indicate interactivity */
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%; /* Make ripples circular */
+            background-color: rgba(0, 0, 0, 0.2); /* Ripple color */
+            pointer-events: none; /* Prevent ripples from interfering with clicks */
+            transform: scale(0); /* Start with no size */
+            opacity: 0;     /* Start invisible */
+            animation: ripple-animation 0.8s linear forwards; /* Animate the ripple */
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4); /* Expand ripple */
+                opacity: 0;       /* Fade out ripple */
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="ripple-container" id="rippleContainer">
+        Click Me!
+    </div>
+
+    <script>
+        const rippleContainer = document.getElementById('rippleContainer');
+
+        rippleContainer.addEventListener('mousedown', function(e) {
+            const x = e.clientX - rippleContainer.offsetLeft;
+            const y = e.clientY - rippleContainer.offsetTop;
+
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+
+            rippleContainer.appendChild(ripple);
+
+           ripple.addEventListener('animationend', () => {
+                ripple.remove(); //Remove the ripple after animation
+            });
+        });
+
+
+
+        rippleContainer.addEventListener('mouseout', function(e) {
+             //You can add mouseout logic here if you want to do something on mouse out.
+             //For example you can reset the background or any other effect you want.
+        });
+
+
+    </script>
+
+</body>
+</html>

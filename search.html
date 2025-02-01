@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Icon with Input</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Container untuk search icon dan input */
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            position: relative;
+            width: 50px; /* Lebar awal hanya untuk icon */
+            transition: width 0.5s ease;
+        }
+
+        /* Style untuk search icon */
+        .search-icon {
+            background-color: #27ae60;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: absolute;
+            right: 0;
+            z-index: 2;
+        }
+
+        /* Style untuk input search */
+        .search-input {
+            width: 0;
+            height: 50px;
+            padding: 0 20px;
+            border: none;
+            border-radius: 25px;
+            outline: none;
+            font-size: 16px;
+            background-color: #f1f1f1;
+            transition: width 0.5s ease;
+            position: absolute;
+            right: 0;
+            z-index: 1;
+            opacity: 0;
+        }
+
+        /* Ketika input aktif (muncul) */
+        .search-container.active .search-input {
+            width: 250px; /* Lebar input saat muncul */
+            opacity: 1;
+        }
+
+        /* Efek hover pada icon */
+        .search-icon:hover {
+            background-color: #219653;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <!-- Input search -->
+        <input type="text" class="search-input" placeholder="Search...">
+        <!-- Icon search -->
+        <div class="search-icon" onclick="toggleSearch()">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan/menyembunyikan input search
+        function toggleSearch() {
+            const container = document.querySelector('.search-container');
+            container.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

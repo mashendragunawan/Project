@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ripple Effect</title>
+    <style>
+        .ripple-container {
+            position: relative;
+            overflow: hidden; 
+            width: 300px; 
+            height: 200px;            background-color: #f0f0f0; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%; 
+            background-color: rgba(0, 0, 0, 0.2); 
+            pointer-events: none; 
+            transform: scale(0); 
+            opacity: 0;
+            animation: ripple-animation 0.8s linear forwards; 
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4); 
+                opacity: 0;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="ripple-container" id="rippleContainer">
+        Click Me!
+    </div>
+
+    <script>
+        const rippleContainer = document.getElementById('rippleContainer');
+
+        rippleContainer.addEventListener('mousedown', function(e) {
+            const x = e.clientX - rippleContainer.offsetLeft;
+            const y = e.clientY - rippleContainer.offsetTop;
+
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+
+            rippleContainer.appendChild(ripple);
+
+           ripple.addEventListener('animationend', () => {
+                ripple.remove(); //Remove the ripple after animation
+            });
+        });
+
+
+
+        rippleContainer.addEventListener('mouseout', function(e) {
+             //You can add mouseout logic here if you want to do something on mouse out.
+             //For example you can reset the background or any other effect you want.
+        });
+
+
+    </script>
+
+</body>
+</html>
