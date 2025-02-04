@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Hidden Password</title>
+</head>
+<body>
+    <input type="password"  id="inp" placeholder="Password">
+
+    <input type="checkbox" onclick="fun()" >Show Password
+</body>
+<script>
+    function fun(){
+        var x = document.getElementById("inp");
+        if (x.type ==="password"){
+            x.type = "text";
+        }else{
+            x.type = "password";
+        }
+    }
+</script>
+</html>
