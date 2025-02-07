@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Checkbox Hewan</title>
+<style>
+  /* CSS untuk tampilan card */
+  .card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* CSS untuk tampilan checkbox */
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Pilih Hewan:</h1>
+
+<div class="card">
+  <label><input type="checkbox" id="ayam"> Ayam</label>
+  <label><input type="checkbox" id="sapi"> Sapi</label>
+  <label><input type="checkbox" id="kucing"> Kucing</label>
+</div>
+
+<button onclick="tampilkanHewanTerpilih()">Tampilkan Hewan Terpilih</button>
+
+<script>
+function tampilkanHewanTerpilih() {
+  let hewanTerpilih = [];
+
+  if (document.getElementById("ayam").checked) {
+    hewanTerpilih.push("Ayam");
+  }
+  if (document.getElementById("sapi").checked) {
+    hewanTerpilih.push("Sapi");
+  }
+  if (document.getElementById("kucing").checked) {
+    hewanTerpilih.push("Kucing");
+  }
+
+  if (hewanTerpilih.length > 0) {
+    alert("Hewan yang Anda pilih: " + hewanTerpilih.join(", "));
+  } else {
+    alert("Anda belum memilih hewan.");
+  }
+}
+</script>
+
+</body>
+</html>
