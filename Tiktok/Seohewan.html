@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Acak Nama Hewan</title>
+</head>
+<body>
+
+<h1>Masukkan Nama Anda:</h1>
+<input type="text" id="namaPengguna">
+<button onclick="acakNamaHewan()">Acak Nama Hewan</button>
+
+<script>
+function acakNamaHewan() {
+  let namaPengguna = document.getElementById("namaPengguna").value;
+
+  if (namaPengguna === "") {
+    alert("Silakan masukkan nama Anda terlebih dahulu.");
+    return;
+  }
+
+  const daftarHewan = ["Ayam", "Sapi", "Kucing", "Anjing", "Kambing", "Kuda", "Monyet", "Beruang", "Harimau", "Singa"];
+  const randomIndex = Math.floor(Math.random() * daftarHewan.length);
+  const namaHewanAcak = daftarHewan[randomIndex];
+
+  alert("Halo, " + namaPengguna + "! Nama hewan acak untuk Anda adalah: " + namaHewanAcak);
+}
+</script>
+
+</body>
+</html>
