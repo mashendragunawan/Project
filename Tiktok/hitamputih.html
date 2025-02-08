@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backgrund Black AND White </title>
+</head>
+<body>
+    <label >
+        <input type="checkbox" name="bk" id="rao" value="ON">ON
+    </label>
+    <label>
+        <input type="checkbox" name="bk" id="raf" value="OFF" checked>OF
+    </label>
+</body>
+<style>
+    body{
+        background-color: #fff;
+        transition: background-color 0.5s ease;
+        font-family: Arial, Helvetica, sans-serif;
+        text-align: center;
+        padding-top: 50px;
+    }
+    label{
+        margin: 0 10px;
+        font-size: 18px;
+    }
+</style>
+<script>
+    const rao = document.getElementById('rao');
+    const raf = document.getElementById('raf');
+
+
+    rao.addEventListener('change', function(){
+        if (this.checked){
+            body.style.backgrundColor = 'balck';
+            body.style.color = 'white';
+        }
+    });
+    raf.addEventListener('change', function(){
+        if (this.checked){
+            body.style.backgrundColor = 'balck';
+            body.style.color = 'white';
+        }
+    })
+</script>
+</html>
