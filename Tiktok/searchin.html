@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari....</title>
+</head>
+<body>
+    <div class="car">
+        <input type="text" placeholder="Cari..." class="carin">
+        <button type="submit" class="carb">Cari</button>
+    </div>
+    <style>
+        .car{
+            position: relative;
+            display: inline-block;
+        }
+        .carin{
+            padding: 10px;
+            padding-right: 40px;
+            border: solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+            font-size: 16px;
+        }
+        .carb{
+            position:absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .carb:hover{
+            background-color: #0056b3;
+        }
+    </style>
+    <script>
+        document.querySelector('.carb').addEventListener('click', function(){
+            const query = document.querySelector('.carin').value;
+            alert('Anda Mencari:' + query);
+        });
+    </script>
+</body>
+</html>
