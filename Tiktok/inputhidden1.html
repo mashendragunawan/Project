@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input Berurutan</title>
+    <style>
+        /* CSS untuk form */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Form Input 1 -->
+        <div id="input1">
+            <input type="text" id="field1" placeholder="Input 1" oninput="showNextInput('input2')">
+        </div>
+
+        <!-- Form Input 2 -->
+        <div id="input2" class="hidden">
+            <input type="text" id="field2" placeholder="Input 2" oninput="showNextInput('input3')">
+        </div>
+
+        <!-- Form Input 3 -->
+        <div id="input3" class="hidden">
+            <input type="text" id="field3" placeholder="Input 3" oninput="showNextInput('input4')">
+        </div>
+
+        <!-- Form Input 4 -->
+        <div id="input4" class="hidden">
+            <input type="text" id="field4" placeholder="Input 4">
+        </div>
+
+        <!-- Tombol Submit -->
+        <div id="submitButton" class="hidden">
+            <input type="submit" value="Submit" onclick="submitForm()">
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan input selanjutnya
+        function showNextInput(nextInputId) {
+            const nextInput = document.getElementById(nextInputId);
+            if (nextInput) {
+                nextInput.classList.remove('hidden');
+            }
+
+            // Tampilkan tombol submit jika input terakhir diisi
+            if (nextInputId === 'input4') {
+                const submitButton = document.getElementById('submitButton');
+                submitButton.classList.remove('hidden');
+            }
+        }
+
+        // Fungsi untuk menangani submit form
+        function submitForm() {
+            const field1 = document.getElementById('field1').value;
+            const field2 = document.getElementById('field2').value;
+            const field3 = document.getElementById('field3').value;
+            const field4 = document.getElementById('field4').value;
+
+            alert(`Data yang diisi:\nInput 1: ${field1}\nInput 2: ${field2}\nInput 3: ${field3}\nInput 4: ${field4}`);
+        }
+    </script>
+</body>
+</html>
