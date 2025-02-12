@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganjil Genap</title>
+</head>
+<body>
+    <div class="utama">
+        <h1>Cek Angka Ganjil Atau Genap</h1>
+        <input type="number" inputmode="inpa" placeholder="Masukan Angka 0-9 " min="0" max="9">
+        <button onclick="cekAngka()">Cek</button>
+        <p id="hasil"></p>
+    </div>
+    <script>
+        function cekAngka(){
+            const angka = document.getElementById('inpa').value;
+            const hasil = document.getElementById('hasil');
+
+            if (angka == '' || isNaN(angka)|| angka <0 || angka >9){
+                hasil.textContent = 'Masukan Angka yang Valid antara 0-9!';
+                hasil.style.color = 'red';
+            }
+
+                if (angka %2 ==0){
+                    hasil.textContent = 'Angka ${angka} adalah angaka genap';
+                    hasil.style.color = 'green';
+                }else {
+                    hasil.textContent = 'Angka ${angka} adalah angka ganjil';
+                    hasil.style.colorInterpolation = 'blue';
+                }
+        }
+    </script>
+</body>
+</html>
