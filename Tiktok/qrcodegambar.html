@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator with Image</title>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code Generator with Image</h1>
+        <form id="qrForm">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="image">Upload Gambar:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            
+            <button type="submit">Generate QR Code</button>
+        </form>
+        
+        <div id="qrCodeContainer">
+            <!-- QR Code akan muncul di sini -->
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</body>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#qrCodeContainer {
+    margin-top: 20px;
+    position: relative;
+}
+
+#qrCodeContainer img {
+    max-width: 100%;
+    height: auto;
+}
+
+#qrCodeContainer .center-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    height: auto;
+}
+</style>
+<script>
+    document.getElementById('qrForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const imageFile = document.getElementById('image').files[0];
+    
+    if (name && imageFile) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imageUrl = e.target.result;
+            generateQRCode(name, imageUrl);
+        };
+        reader.readAsDataURL(imageFile);
+    }
+});
+
+function generateQRCode(text, imageUrl) {
+    const qrCodeContainer = document.getElementById('qrCodeContainer');
+    qrCodeContainer.innerHTML = ''; // Bersihkan kontainer sebelumnya
+    
+    const qrcode = new QRCode(qrCodeContainer, {
+        text: text,
+        width: 256,
+        height: 256,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+    
+    // Tambahkan gambar di tengah QR Code
+    const img = document.createElement('img');
+    img.src = imageUrl;
+    img.classList.add('center-image');
+    qrCodeContainer.appendChild(img);
+}
+</script>
+</html>

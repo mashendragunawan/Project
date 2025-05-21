@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembagian Kelompok</title>
+    <style>
+        /* CSS */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: none;
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #hasil {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .kelompok {
+            margin-bottom: 15px;
+        }
+
+        .kelompok h3 {
+            margin: 0 0 10px 0;
+            color: #007BFF;
+        }
+
+        .kelompok p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pembagian Kelompok</h1>
+        <textarea id="namaInput" placeholder="Masukkan nama-nama, pisahkan dengan enter"></textarea>
+        <select id="jumlahKelompok">
+            <option value="2">2 Kelompok</option>
+            <option value="3">3 Kelompok</option>
+            <option value="4">4 Kelompok</option>
+            <option value="5">5 Kelompok</option>
+        </select>
+        <button onclick="generateKelompok()">Generate Kelompok</button>
+        <div id="hasil"></div>
+    </div>
+
+    <script>
+        // JavaScript
+        function generateKelompok() {
+            // Ambil nilai dari textarea dan select
+            const namaInput = document.getElementById('namaInput').value.trim();
+            const jumlahKelompok = parseInt(document.getElementById('jumlahKelompok').value);
+            const hasil = document.getElementById('hasil');
+
+            // Validasi apakah input nama kosong
+            if (namaInput === '') {
+                alert('Masukkan nama-nama terlebih dahulu!');
+                return;
+            }
+
+            // Pisahkan nama-nama berdasarkan baris baru
+            const namaArray = namaInput.split('\n').filter(nama => nama.trim() !== '');
+
+            // Validasi apakah jumlah nama cukup untuk dibagi
+            if (namaArray.length < jumlahKelompok) {
+                alert('Jumlah nama tidak cukup untuk dibagi ke dalam ' + jumlahKelompok + ' kelompok!');
+                return;
+            }
+
+            // Acak urutan nama
+            const namaAcak = namaArray.sort(() => Math.random() - 0.5);
+
+            // Bagi nama ke dalam kelompok
+            const kelompok = [];
+            for (let i = 0; i < jumlahKelompok; i++) {
+                kelompok.push([]);
+            }
+
+            for (let i = 0; i < namaAcak.length; i++) {
+                const kelompokIndex = i % jumlahKelompok;
+                kelompok[kelompokIndex].push(namaAcak[i]);
+            }
+
+            // Tampilkan hasil
+            hasil.innerHTML = ''; // Bersihkan hasil sebelumnya
+            kelompok.forEach((kel, index) => {
+                const kelompokDiv = document.createElement('div');
+                kelompokDiv.className = 'kelompok';
+                kelompokDiv.innerHTML = `
+                    <h3>Kelompok ${index + 1}</h3>
+                    <p>${kel.join(', ')}</p>
+                `;
+                hasil.appendChild(kelompokDiv);
+            });
+        }
+    </script>
+</body>
+</html>

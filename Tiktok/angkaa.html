@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konversi Angka ke Kata</title>
+    <style>
+        /* CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Konversi Angka ke Kata</h1>
+        <form id="angkaForm">
+            <label for="angkaInput">Masukkan angka (0-10):</label>
+            <input type="number" id="angkaInput" min="0" max="10" required>
+            <button type="submit">Konversi</button>
+        </form>
+        <p id="output"></p>
+    </div>
+
+    <script>
+        // JavaScript
+        document.getElementById('angkaForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Mencegah form submit
+
+            // Ambil nilai input
+            const angkaInput = parseInt(document.getElementById('angkaInput').value);
+
+            // Kamus konversi angka ke kata
+            const angkaDict = {
+                0: 'nol',
+                1: 'satu',
+                2: 'dua',
+                3: 'tiga',
+                4: 'empat',
+                5: 'lima',
+                6: 'enam',
+                7: 'tujuh',
+                8: 'delapan',
+                9: 'sembilan',
+                10: 'sepuluh'
+            };
+
+            // Cek apakah angka valid
+            if (angkaInput >= 0 && angkaInput <= 10) {
+                document.getElementById('output').textContent = `Angka yang Anda masukkan adalah ${angkaDict[angkaInput]}`;
+            } else {
+                document.getElementById('output').textContent = 'Angka tidak dikenali. Masukkan angka antara 0-10.';
+            }
+        });
+    </script>
+</body>
+</html>

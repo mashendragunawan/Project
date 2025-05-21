@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload dan Tampilkan Foto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .upload-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Menyembunyikan input file bawaan */
+        .file-input {
+            display: none;
+        }
+
+        /* Gaya untuk tombol kustom "Telusur" */
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-right: 10px; /* Jarak antara tombol Telusur dan Upload */
+        }
+
+        .custom-file-upload:hover {
+            background-color: #0056b3;
+        }
+
+        /* Gaya untuk tombol "Upload" */
+        .upload-button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-button:hover {
+            background-color: #218838;
+        }
+
+        /* Gaya untuk tombol "Clear" */
+        .clear-button {
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            display: none; /* Awalnya tombol clear disembunyikan */
+        }
+
+        .clear-button:hover {
+            background-color: #c82333;
+        }
+
+        /* Gaya untuk menampilkan nama file */
+        .file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .image-preview {
+            margin-top: 20px;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="upload-container">
+        <h2>Upload Foto</h2>
+        <!-- Input file yang disembunyikan -->
+        <input type="file" id="fileInput" class="file-input" accept="image/*">
+        <!-- Tombol kustom untuk memilih file -->
+        <label for="fileInput" class="custom-file-upload">Telusur</label>
+        <!-- Tombol Upload -->
+        <button class="upload-button" onclick="uploadImage()">Upload</button>
+        <!-- Tempat untuk menampilkan nama file -->
+        <div class="file-name" id="fileName"></div>
+        <!-- Tempat untuk menampilkan gambar -->
+        <div class="image-preview" id="imagePreview"></div>
+        <!-- Tombol Clear -->
+        <button class="clear-button" id="clearButton" onclick="clearImage()">Clear</button>
+    </div>
+
+    <script>
+        // Fungsi untuk menampilkan nama file yang dipilih
+        document.getElementById('fileInput').addEventListener('change', function() {
+            const fileNameDisplay = document.getElementById('fileName');
+            if (this.files && this.files[0]) {
+                fileNameDisplay.textContent = `File dipilih: ${this.files[0].name}`;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        });
+
+        // Fungsi untuk menampilkan gambar yang diupload
+        function uploadImage() {
+            const fileInput = document.getElementById('fileInput');
+            const imagePreview = document.getElementById('imagePreview');
+            const clearButton = document.getElementById('clearButton');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    imagePreview.innerHTML = '';
+                    imagePreview.appendChild(img);
+
+                    // Tampilkan tombol Clear setelah gambar diupload
+                    clearButton.style.display = 'inline-block';
+                }
+
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                imagePreview.innerHTML = '<p>No image selected.</p>';
+            }
+        }
+
+        // Fungsi untuk menghapus gambar dan reset nama file
+        function clearImage() {
+            const fileInput = document.getElementById('fileInput');
+            const imagePreview = document.getElementById('imagePreview');
+            const fileNameDisplay = document.getElementById('fileName');
+            const clearButton = document.getElementById('clearButton');
+
+            // Reset input file
+            fileInput.value = '';
+
+            // Hapus gambar yang ditampilkan
+            imagePreview.innerHTML = '';
+
+            // Hapus nama file yang ditampilkan
+            fileNameDisplay.textContent = '';
+
+            // Sembunyikan tombol Clear setelah diklik
+            clearButton.style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>

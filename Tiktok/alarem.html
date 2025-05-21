@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Alarm Sederhana</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .alarm-container {
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+    }
+
+    input[type="time"] {
+      padding: 8px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="alarm-container">
+    <h1>Alarm Sederhana</h1>
+    <input type="time" id="alarmTime">
+    <button id="setAlarm">Set Alarm</button>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const alarmTime = document.getElementById('alarmTime');
+    const setAlarmBtn = document.getElementById('setAlarm');
+    const message = document.getElementById('message');
+    let alarmInterval;
+
+    setAlarmBtn.addEventListener('click', () => {
+      const time = alarmTime.value;
+      if (time) {
+        startAlarm(time);
+        message.textContent = `Alarm diatur untuk ${time}`;
+      } else {
+        message.textContent = 'Masukkan waktu alarm!';
+      }
+    });
+
+    function startAlarm(time) {
+      const [hours, minutes] = time.split(':');
+      alarmInterval = setInterval(() => {
+        const now = new Date();
+        const currentHours = now.getHours().toString().padStart(2, '0');
+        const currentMinutes = now.getMinutes().toString().padStart(2, '0');
+
+        if (currentHours === hours && currentMinutes === minutes) {
+          clearInterval(alarmInterval);
+          alert('Waktunya bangun!'); // Atau mainkan suara alarm
+          message.textContent = 'Alarm berbunyi!';
+        }
+      }, 1000); // Cek setiap detik
+    }
+  </script>
+
+</body>
+</html>

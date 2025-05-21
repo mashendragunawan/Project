@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jam Digital Ceria</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #a1c4fd, #c2e9fb, #d4fc79);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .clock {
+            font-size: 5rem;
+            color: white;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .date {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: white;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .emoji {
+            font-size: 2rem;
+            position: absolute;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .emoji:nth-child(1) {
+            top: -50px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .emoji:nth-child(2) {
+            top: -50px;
+            right: -50px;
+            animation-delay: 0.5s;
+        }
+
+        .emoji:nth-child(3) {
+            bottom: -50px;
+            left: -50px;
+            animation-delay: 1s;
+        }
+
+        .emoji:nth-child(4) {
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .greeting {
+            margin-top: 20px;
+            font-size: 1.8rem;
+            color: white;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji">🌞</div>
+        <div class="emoji">🌈</div>
+        <div class="emoji">🌻</div>
+        <div class="emoji">🎈</div>
+        
+        <div class="clock" id="clock">00:00:00</div>
+        <div class="date" id="date">Hari, 1 Januari 2023</div>
+        <div class="greeting" id="greeting">Selamat pagi!</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Format waktu
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            // Format tanggal
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            const dayName = days[now.getDay()];
+            const date = now.getDate();
+            const monthName = months[now.getMonth()];
+            const year = now.getFullYear();
+            document.getElementById('date').textContent = `${dayName}, ${date} ${monthName} ${year}`;
+            
+            // Ucapan selamat
+            let greeting = '';
+            const hour = now.getHours();
+            if (hour < 11) greeting = 'Selamat pagi! 🌅';
+            else if (hour < 15) greeting = 'Selamat siang! ☀️';
+            else if (hour < 18) greeting = 'Selamat sore! 🌇';
+            else greeting = 'Selamat malam! 🌙';
+            document.getElementById('greeting').textContent = greeting;
+        }
+        
+        // Update jam setiap detik
+        setInterval(updateClock, 1000);
+        updateClock(); // Jalankan sekali saat pertama kali load
+    </script>
+</body>
+</html>

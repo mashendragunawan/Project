@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Area Responsif</title>
+</head>
+<body>
+    <div class="utama">
+        <textarea  id="texs" placeholder=" Ketikan Sesuatu Disini"></textarea>
+    </div>
+</body>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 50px;
+    }
+    .utama{
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    textarea{
+        width: 100%;
+        min-height: 40px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+        overflow: hidden;
+        line-height: 1.5;
+    }
+    textarea::placeholder{
+        color:#999;
+    }
+</style>
+<script>
+    const textarea = document.getElementById('texs');
+
+    function autore(){
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+    textarea.addEventListener('input', autore);
+    autore();
+</script>
+</html>

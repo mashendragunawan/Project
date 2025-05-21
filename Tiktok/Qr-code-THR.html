@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator dengan Bingkai</title>
+    <style>
+        /* Body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Bingkai untuk QR Code */
+        .qrcode-frame {
+            display: inline-block;
+            padding: 20px;
+            background-color: #fff;
+            border: 10px solid #ffcc00; /* Warna bingkai kuning */
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        /* QR Code container */
+        #qrcode {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code Generator untuk THR</h1>
+        <input type="text" id="thr-data" placeholder="Masukkan link atau teks THR">
+        <button onclick="generateQRCode()">Buat QR Code</button>
+        <div class="qrcode-frame">
+            <div id="qrcode"></div>
+        </div>
+    </div>
+
+    <!-- Library QRCode.js -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+
+    <script>
+        // Fungsi untuk membuat QR Code
+        function generateQRCode() {
+            const inputData = document.getElementById('thr-data').value;
+            const qrcodeContainer = document.getElementById('qrcode');
+
+            // Bersihkan kontainer QR Code sebelumnya
+            qrcodeContainer.innerHTML = '';
+
+            if (inputData) {
+                // Buat QR Code baru
+                new QRCode(qrcodeContainer, {
+                    text: inputData,
+                    width: 200,
+                    height: 200,
+                });
+            } else {
+                alert("Masukkan link atau teks THR terlebih dahulu!");
+            }
+        }
+    </script>
+</body>
+</html>

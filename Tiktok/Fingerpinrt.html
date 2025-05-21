@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finger Print</title>
+</head>
+<body>
+    <div class="utama">
+        <h1>FingerPrint Test </h1>
+        <div class="scan">
+            <div class="scanner"></div>
+        </div>
+        <button id="scanButton">Scan FingerPrint</button>
+        <p id="result"></p>
+    </div>
+</body>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+    .utama{
+        text-align: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .scan{
+        width: 150px;
+        height: 150px;
+        border:  2px solid #ccc;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px auto;
+    }
+    .scanner{
+        width: 100px;
+        height: 100px;
+        background-color: #e0e0e0;
+        border-radius: 50%;
+        animation: scan 2s infinite;
+    }
+    button{
+        padding:  10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+    }
+    button:hover{
+        background-color: #0056b3;
+    }
+    #result{
+        margin-top: 20px;
+        font-size: 18px;
+    }
+</style>
+<script>
+    document.getElementById('scanButton').addEventListener('click', function() {
+        // Simulate fingerprint scanning
+        document.getElementById('result').textContent = "Scanning...";
+        
+        setTimeout(() => {
+            // Simulate a successful scan
+            document.getElementById('result').textContent = "Fingerprint recognized!";
+        }, 2000); // Simulate a 2-second delay
+    });
+</script>
+</html>

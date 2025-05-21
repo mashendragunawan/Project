@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tampilkan dan Simpan Gambar dari URL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* Styling untuk form */
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-container button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling untuk gambar dan tombol clear */
+        .image-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .clear-button {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .clear-button:hover {
+            background-color: #cc0000;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Form Input -->
+        <div class="form-container">
+            <h2>Masukkan URL Gambar</h2>
+            <input type="url" id="imageUrl" placeholder="Masukkan URL gambar (contoh: https://example.com/image.jpg)">
+            <button onclick="loadImage()">Tampilkan Gambar</button>
+            <button onclick="saveImage()" style="background-color: #28a745; margin-top: 10px;">Simpan Gambar</button>
+        </div>
+
+        <!-- Tempat Menampilkan Gambar dan Tombol Clear -->
+        <div class="image-container" id="imageContainer">
+            <!-- Gambar akan muncul di sini -->
+        </div>
+    </div>
+
+    <script>
+        let currentImageUrl = ''; // Variabel untuk menyimpan URL gambar yang sedang ditampilkan
+
+        // Fungsi untuk menampilkan gambar
+        function loadImage() {
+            const imageUrl = document.getElementById('imageUrl').value;
+            const imageContainer = document.getElementById('imageContainer');
+
+            // Validasi URL
+            if (!imageUrl) {
+                alert('Harap masukkan URL gambar!');
+                return;
+            }
+
+            // Simpan URL gambar ke variabel
+            currentImageUrl = imageUrl;
+
+            // Buat elemen gambar
+            const img = document.createElement('img');
+            img.src = imageUrl;
+
+            // Tambahkan event listener untuk menangani error
+            img.onerror = () => {
+                imageContainer.innerHTML = '<div class="error-message">Gagal memuat gambar. Pastikan URL valid.</div>';
+            };
+
+            // Kosongkan container dan tampilkan gambar
+            imageContainer.innerHTML = '';
+            imageContainer.appendChild(img);
+
+            // Tambahkan tombol Clear
+            const clearButton = document.createElement('button');
+            clearButton.className = 'clear-button';
+            clearButton.textContent = 'Clear';
+            clearButton.onclick = clearImage;
+            imageContainer.appendChild(clearButton);
+        }
+
+        // Fungsi untuk menghapus gambar dan mengosongkan input URL
+        function clearImage() {
+            const imageContainer = document.getElementById('imageContainer');
+            const imageUrlInput = document.getElementById('imageUrl');
+
+            // Kosongkan container dan input URL
+            imageContainer.innerHTML = '';
+            imageUrlInput.value = '';
+            currentImageUrl = ''; // Reset URL gambar
+        }
+
+        // Fungsi untuk menyimpan gambar di sisi client
+        function saveImage() {
+            if (!currentImageUrl) {
+                alert('Harap tampilkan gambar terlebih dahulu!');
+                return;
+            }
+
+            // Buat elemen <a> untuk mengunduh gambar
+            const downloadLink = document.createElement('a');
+            downloadLink.href = currentImageUrl;
+            downloadLink.download = 'downloaded_image.jpg'; // Nama file yang akan diunduh
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+
+            alert('Gambar berhasil diunduh!');
+        }
+    </script>
+</body>
+</html>

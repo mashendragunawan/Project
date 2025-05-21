@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurora Color</title>
+</head>
+<body>
+    <div class="au">
+        MasHendraGunawan
+    </div>
+</body>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: black;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .au{
+        font-size: 5rem;
+        font-weight: bold;
+        background: linear-gradient(90deg, #ff0099, #ff6600, #ffdd00, #00ffcc, #0099ff, #6600ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 400% 400%;
+        animation: aurora 10s ease infinite;
+    }
+    @keyframes aurora{
+        0%{
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100%{
+            background-position: 0% 50%;
+        }
+    }
+</style>
+</html>

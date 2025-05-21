@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Tags dalam Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Styling untuk tombol Add */
+        .add-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling untuk popup form */
+        .modal {
+            display: none; /* Sembunyikan modal secara default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Latar belakang semi-transparan */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .modal-content button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Styling untuk card */
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 15px;
+        }
+
+        .tags-container {
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            font-size: 12px;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .card-date {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .read-more-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .read-more-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Tombol Add -->
+        <button class="add-button" onclick="openModal()">Add</button>
+
+        <!-- Popup Form -->
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2>Buat Card Baru</h2>
+                <input type="text" id="photoUrl" placeholder="URL Foto">
+                <input type="text" id="tag" placeholder="Tag (pisahkan dengan koma, contoh: Technology, Design, Art)">
+                <input type="text" id="title" placeholder="Judul">
+                <input type="date" id="date"> <!-- Input type date -->
+                <button onclick="saveCard()">Simpan</button>
+                <button onclick="closeModal()" style="background-color: #ccc; margin-left: 10px;">Batal</button>
+            </div>
+        </div>
+
+        <!-- Tempat Menampilkan Card -->
+        <div id="cardContainer"></div>
+    </div>
+
+    <script>
+        // Fungsi untuk membuka modal
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        // Fungsi untuk menutup modal
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Fungsi untuk menyimpan card
+        function saveCard() {
+            // Ambil nilai dari form
+            const photoUrl = document.getElementById('photoUrl').value;
+            const tagInput = document.getElementById('tag').value;
+            const title = document.getElementById('title').value;
+            const date = document.getElementById('date').value;
+
+            // Validasi input
+            if (!photoUrl || !tagInput || !title || !date) {
+                alert('Harap isi semua field!');
+                return;
+            }
+
+            // Pisahkan tag berdasarkan koma atau spasi
+            const tags = tagInput.split(/[,\s]+/).filter(tag => tag.trim() !== '');
+
+            // Format tanggal ke bentuk yang lebih mudah dibaca (opsional)
+            const formattedDate = new Date(date).toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+
+            // Buat elemen card baru
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            // Isi card dengan data dari form
+            card.innerHTML = `
+                <img src="${photoUrl}" alt="Foto">
+                <div class="card-content">
+                    <div class="tags-container">
+                        ${tags.map(tag => `<div class="tag">${tag}</div>`).join('')}
+                    </div>
+                    <div class="card-title">${title}</div>
+                    <div class="card-date">${formattedDate}</div>
+                    <a href="#" class="read-more-button">Read More</a>
+                </div>
+            `;
+
+            // Tambahkan card ke dalam container
+            document.getElementById('cardContainer').appendChild(card);
+
+            // Reset form dan tutup modal
+            document.getElementById('photoUrl').value = '';
+            document.getElementById('tag').value = '';
+            document.getElementById('title').value = '';
+            document.getElementById('date').value = '';
+            closeModal();
+        }
+    </script>
+
+</body>
+</html>

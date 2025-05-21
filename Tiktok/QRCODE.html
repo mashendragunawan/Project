@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate QR Code dengan Tombol Download</title>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.0/build/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        #qrcode {
+            margin-top: 20px;
+        }
+        #downloadButton {
+            display: none; /* Sembunyikan tombol download awalnya */
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate QR Code dengan Tombol Download</h1>
+    <input type="text" id="namaInput" placeholder="Masukkan nama atau teks..." />
+    <button onclick="generateQRCode()">Generate QR Code</button>
+
+    <div id="qrcode"></div>
+    <button id="downloadButton" onclick="downloadQRCode()">Download QR Code</button>
+
+    <script>
+        let qrCodeCanvas = null; // Variabel untuk menyimpan canvas QR Code
+
+        function generateQRCode() {
+            // Ambil nilai dari input
+            const nama = document.getElementById("namaInput").value.trim();
+
+            // Hapus QR Code sebelumnya jika ada
+            const qrcodeElement = document.getElementById("qrcode");
+            qrcodeElement.innerHTML = ""; // Bersihkan konten sebelumnya
+
+            // Sembunyikan tombol download
+            document.getElementById("downloadButton").style.display = "none";
+
+            // Jika input tidak kosong, generate QR Code
+            if (nama) {
+                QRCode.toCanvas(nama, { errorCorrectionLevel: 'H' }, function (err, canvas) {
+                    if (err) {
+                        console.error("Gagal menghasilkan QR Code:", err);
+                        return;
+                    }
+                    qrcodeElement.appendChild(canvas); // Tambahkan canvas ke elemen
+                    qrCodeCanvas = canvas; // Simpan canvas ke variabel
+                    document.getElementById("downloadButton").style.display = "block"; // Tampilkan tombol download
+                });
+            } else {
+                alert("Masukkan nama atau teks terlebih dahulu!");
+            }
+        }
+
+        function downloadQRCode() {
+            if (qrCodeCanvas) {
+                // Konversi canvas ke data URL (format PNG)
+                const url = qrCodeCanvas.toDataURL("image/png");
+
+                // Buat elemen <a> untuk download
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = "qrcode.png"; // Nama file yang akan di-download
+                document.body.appendChild(link);
+                link.click(); // Trigger download
+                document.body.removeChild(link); // Hapus elemen <a> setelah download
+            } else {
+                alert("Tidak ada QR Code yang tersedia untuk di-download.");
+            }
+        }
+    </script>
+</body>
+</html>
